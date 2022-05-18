@@ -2,6 +2,7 @@ const knex = require("../conexao");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const senhaHash = require("../senhaHash");
+const nodemailer = require("../nodemailer");
 
 const login = async (req, res) => {
   const { email, senha } = req.body;
@@ -26,6 +27,16 @@ const login = async (req, res) => {
     const token = jwt.sign({ id: usuario.id }, senhaHash, { expiresIn: "8h" });
 
     const { senha: _, ...dadosUsuario } = usuario;
+
+    //! envio do email de boas vindas:
+
+    const dadosEnvio = {
+      from: `Market cubos <no-reply@fakemail.com>`,
+      to: email,
+      subject: "login na plataforma Market Cubos",
+      text: `O ${email} realizou um Login na plataforme Market Cubos, caso não tenha sido você altere sua senha.`,
+    };
+    await nodemailer.sendMail(dadosEnvio);
 
     return res.json({ usuario: dadosUsuario, token });
   } catch (error) {

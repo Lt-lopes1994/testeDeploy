@@ -41,14 +41,14 @@ const cadastrarUsuario = async (req, res) => {
       return res.status(400).json("O usuário não foi cadastrado.");
     }
 
-    //! Enviar email de boas vindas
-    const dadosEnvio = {
-      from: `Market cubos <no-reply@fakemail.com>`,
-      to: email,
-      subject: "Bem vindo ao Market Cubos",
-      text: `Olá ${nome}! Você realizou um cadastro na plataforme Market Cubos use o ${email} para fazer o login!.`,
-    };
-    await nodemailer.sendMail(dadosEnvio);
+    // //! Enviar email de boas vindas
+    // const dadosEnvio = {
+    //   from: `Market cubos <no-reply@fakemail.com>`,
+    //   to: email,
+    //   subject: "Bem vindo ao Market Cubos",
+    //   text: `Olá ${nome}! Você realizou um cadastro na plataforme Market Cubos use o ${email} para fazer o login!.`,
+    // };
+    // await nodemailer.sendMail(dadosEnvio);
 
     return res.status(200).json("O usuario foi cadastrado com sucesso!");
   } catch (error) {

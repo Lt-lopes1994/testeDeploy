@@ -30,17 +30,17 @@ const login = async (req, res) => {
 
     //! envio do email de boas vindas:
 
-    const dadosEnvio = {
-      from: `Market cubos <no-reply@fakemail.com>`,
-      to: email,
-      subject: "login na plataforma Market Cubos",
-      text: `O ${email} realizou um Login na plataforme Market Cubos, caso não tenha sido você altere sua senha.`,
-    };
-    await nodemailer.sendMail(dadosEnvio);
+    // const dadosEnvio = {
+    //   from: `Market cubos <no-reply@fakemail.com>`,
+    //   to: email,
+    //   subject: "login na plataforma Market Cubos",
+    //   text: `O ${email} realizou um Login na plataforme Market Cubos, caso não tenha sido você altere sua senha.`,
+    // };
+    // nodemailer.sendMail(dadosEnvio);
 
     return res.json({ usuario: dadosUsuario, token });
   } catch (error) {
-    return res.status(400).json(error.message);
+    return res.json(error);
   }
 };
 
